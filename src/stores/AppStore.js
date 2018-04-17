@@ -6,7 +6,9 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers/rootReducer';
 import sejmikSaga from '../sagas/sagas';
 
-export const history = createHistory();
+export const history = createHistory({
+    basename: '/administrator/index.php?option=com_sejmik'
+});
 const historyMiddleware = routerMiddleware(history);
 const sagaMiddleware = createSagaMiddleware();
 
