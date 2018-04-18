@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import { Link } from 'react-router-dom';
 
-import HomeComponent from './HomeComponent';
+import ContentComponent from './ContentComponent';
+import HeaderComponent from './HeaderComponent';
 
 class App extends React.Component {
     constructor(props) {
@@ -12,10 +13,9 @@ class App extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Link to="">Home</Link>
-                <Link to="/posel">Posel</Link>
+                <HeaderComponent />
                 <Switch>
-                    <Route exact path="" component={HomeComponent} />
+                    <Route exact path="" component={ContentComponent} />
                 </Switch>
             </React.Fragment>
         )

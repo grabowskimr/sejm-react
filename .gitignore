@@ -1,2 +1,4 @@
 node_modules
 dist
+src/php/dbCall.php
+src/php/upload.php

@@ -1,15 +1,15 @@
 import React from 'react';
 
-class PoselList extends React.Component {
+class EnvoyComponent extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
         return (
-            <h1>PoselList</h1>
+            <h1>EnvoyComponent</h1>
         )
     }
 }
 
-export default PoselList;
+export default EnvoyComponent;

@@ -7,7 +7,7 @@ import rootReducer from '../reducers/rootReducer';
 import sejmikSaga from '../sagas/sagas';
 
 export const history = createHistory({
-    basename: '/administrator/index.php?option=com_sejmik'
+    basename: '/administrator/index.php?option=com_sejmik/'
 });
 const historyMiddleware = routerMiddleware(history);
 const sagaMiddleware = createSagaMiddleware();
