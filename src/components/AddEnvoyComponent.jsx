@@ -1,40 +1,29 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { getEnvoyStructure } from '../actions/actions';
 import Title from '../containers/Title';
+import EnvoyForm from './EnvoyForm';
 
 class AddEnvoyComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            structure: this.props.envoyStructure
-        }
+        this.submitForm = this.submitForm.bind(this);
     }
 
-    componentDidMount() {
-        this.props.getEnvoyStructure();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            structure: nextProps.structure
-        })
+    submitForm(e, values) {
+        e.preventDefault();
+        console.log(values);
     }
 
     render() {
         return (
             <React.Fragment>
-                <Title>AddEnvoyComponent</Title>
+                <Title>Dodaj Posła</Title>
+                <EnvoyForm 
+                    submitForm={this.submitForm}
+                />
             </React.Fragment>
         )
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        envoyStructure: state.appReducer.envoyStructure
-    }
-}
-
-export default connect(mapStateToProps, {getEnvoyStructure})(AddEnvoyComponent);
+export default AddEnvoyComponent;

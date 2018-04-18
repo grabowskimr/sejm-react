@@ -1,7 +1,7 @@
 import ACTIONS from '../constants/actions';
 
 const appReducer = (state = {
-    envoyStructure: {}
+    envoyStructure: []
 }, action) => {
     switch(action.type) {
         case ACTIONS.GET_ENVOY_STRUCTURE_SUCCESS:

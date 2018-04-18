@@ -32,6 +32,7 @@ const LabeledSelectContainer = styled.div`
 `;
 
 const SelectContainer = (props) => {
+    var options = props.options || [];
     return (
         <React.Fragment>
             {props.label ? 
@@ -39,14 +40,14 @@ const SelectContainer = (props) => {
                     <Label>{props.label}</Label>
                     <Select {...props}>
                         <option value="">Wszystkie</option>
-                        {props.options.map(option => (
+                        {options.map(option => (
                             <option key={option.value} value={option.value}>{option.name}</option>
                         ))}
                     </Select>
                 </LabeledSelectContainer> : 
                 <Select {...props}>
                     <option value="">Wszystkie</option>
-                    {props.options.map(option => (
+                    {options.map(option => (
                         <option key={option.value} value={option.value}>{option.name}</option>
                     ))}
                 </Select>}
