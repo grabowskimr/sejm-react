@@ -10,9 +10,10 @@ const Input = styled.input`
     margin: 5px !important;
     border: 1px solid #a2a2a2;
     padding: 6px 10px;
+    max-width: ${props => props.type === 'file' && '300px'};
     &:focus {
         border: 1px solid #1a3867;
-    }
+    };
 `;
 
 const Label = styled.label`

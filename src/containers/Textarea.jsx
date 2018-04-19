@@ -11,6 +11,8 @@ const Textarea = styled.textarea`
     border: 1px solid #a2a2a2;
     padding: 6px 10px;
     height: 200px;
+    max-width: 95%;
+    width: 400px;
     &:focus {
         border: 1px solid #1a3867;
     }

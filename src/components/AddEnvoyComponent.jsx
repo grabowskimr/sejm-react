@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Title from '../containers/Title';
 import EnvoyForm from './EnvoyForm';
+import { addEnvoy } from '../actions/actions';
 
 class AddEnvoyComponent extends React.Component {
     constructor(props) {
@@ -11,7 +13,8 @@ class AddEnvoyComponent extends React.Component {
 
     submitForm(e, values) {
         e.preventDefault();
-        console.log(values);
+        this.props.addEnvoy(values);
+        this.props.history.push('/');
     }
 
     render() {
@@ -26,4 +29,6 @@ class AddEnvoyComponent extends React.Component {
     }
 }
 
-export default AddEnvoyComponent;
+
+
+export default connect(null, {addEnvoy})(AddEnvoyComponent);

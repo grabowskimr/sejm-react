@@ -63,9 +63,9 @@ const CriterionInput = styled(Input)`
 const CriterionContainer = (props) => (
     <Criterion>
         <CriterionInput {...props} />
-        <NeutralBtn onClick={props.clickNeutral} status={props.status} > :| </NeutralBtn>
-        <PosiviveBtn onClick={props.clickPositive} status={props.status} > :) </PosiviveBtn>
-        <NegativeBtn onClick={props.clickNegative} status={props.status} > :( </NegativeBtn>
+        <NeutralBtn onClick={(e) => props.changeStatus(e, props.name, 0)} status={props.status} > :| </NeutralBtn>
+        <PosiviveBtn onClick={(e) => props.changeStatus(e, props.name, 1)} status={props.status} > :) </PosiviveBtn>
+        <NegativeBtn onClick={(e) => props.changeStatus(e, props.name, -1)} status={props.status} > :( </NegativeBtn>
     </Criterion>
 );
 
