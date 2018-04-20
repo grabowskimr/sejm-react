@@ -18,6 +18,8 @@ const MenuLink = styled(Link)`
     color: #fff;
     border: none;
     border-radius: 3px;
+    display: block;
+    text-align: center;
     text-decoration: none;
     transition: all .2s ease-in-out;
     &:hover {
@@ -37,6 +39,7 @@ const HeaderContainer = () => (
             <li><MenuLink to="/">Home</MenuLink></li>
             <li><MenuLink to="/dodaj">Dodaj posła</MenuLink></li>
             <li><MenuLink to="/dodajKryterium">Dodaj Kryterium</MenuLink></li>
+            <li><MenuLink to="/usunKryterium">Usuń Kryterium</MenuLink></li>
         </MenuList>
     </Section>
 );

@@ -40,15 +40,15 @@ const SelectContainer = (props) => {
                     <Label>{props.label}</Label>
                     <Select {...props}>
                         <option value="">Wszystkie</option>
-                        {options.map(option => (
-                            <option key={option.value} value={option.value}>{option.name}</option>
+                        {options.map((option, index) => (
+                            <option key={index} value={option[props.iterateValue]}>{option[props.iterateName]}</option>
                         ))}
                     </Select>
                 </LabeledSelectContainer> : 
                 <Select {...props}>
                     <option value="">Wszystkie</option>
-                    {options.map(option => (
-                        <option key={option.value} value={option.value}>{option.name}</option>
+                    {options.map((option, index) => (
+                        <option key={index} value={option[props.iterateValue]}>{option[props.iterateName]}</option>
                     ))}
                 </Select>}
         </React.Fragment>

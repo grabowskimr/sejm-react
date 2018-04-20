@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import Title from '../containers/Title';
 import EnvoyForm from './EnvoyForm';
-import { getEnvoy, updateEnvoy } from '../actions/actions';
+import Section from '../containers/Section';
+import { getEnvoy, updateEnvoy, getEnvoyStructure, removeEnvoy } from '../actions/actions';
 
 class UpdateEnvoyComponent extends React.Component {
     constructor(props) {
@@ -12,15 +13,16 @@ class UpdateEnvoyComponent extends React.Component {
         this.state = {
             id: this.props.match.params.id,
             envoy: this.props.envoy
-        }
+        };
+        this.remove = this.remove.bind(this);
     }
 
     componentDidMount() {
+        this.props.getEnvoyStructure();
         this.props.getEnvoy(this.state.id);
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
         this.setState({
             envoy: nextProps.envoy
         })
@@ -32,17 +34,23 @@ class UpdateEnvoyComponent extends React.Component {
         this.props.history.push('/');
     }
 
+    remove() {
+        this.props.removeEnvoy(this.state.id);
+        this.props.history.push('/');
+    }
+
     render() {
         return (
-            <React.Fragment>
+            <Section>
                 <Title>Edytuj Posła</Title>
                 {this.state.envoy.id ? 
                     <EnvoyForm 
                         submitForm={this.submitForm}
                         envoy={this.state.envoy}
+                        remove={this.remove}
                     />
                 : null}
-            </React.Fragment>
+            </Section>
         )
     }
 }
@@ -54,4 +62,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, {getEnvoy, updateEnvoy})(UpdateEnvoyComponent);
+export default connect(mapStateToProps, {getEnvoy, updateEnvoy, getEnvoyStructure, removeEnvoy})(UpdateEnvoyComponent);

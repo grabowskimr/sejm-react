@@ -5,6 +5,7 @@ const Grid = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
+    flex-wrap: wrap;
 `;
 
 const GridContainer = (props) => (

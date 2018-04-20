@@ -8,12 +8,15 @@ import Textarea from '../containers/Textarea';
 import Button from '../containers/Button';
 import Criterion from '../containers/Criterion';
 import ImageThumb from '../containers/ImageThumb';
+import Grid from '../containers/Grid';
+import RemoveButton from '../containers/RemoveButton';
 
 class EnvoyForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            structure: this.props.envoyStructure
+            structure: this.props.envoyStructure,
+            parties: this.props.parties
         };
         this.onChange = this.onChange.bind(this);
         this.changeCriterion = this.changeCriterion.bind(this);
@@ -28,7 +31,15 @@ class EnvoyForm extends React.Component {
         var intuts = {};
         nextProps.envoyStructure.map((input) => {
             if(input.Field.match(/criterion/)) {
-                intuts[input.Field] = nextProps.envoy ? JSON.parse(nextProps.envoy[input.Field]) : {value: '', status: 0};
+                if(nextProps.envoy && nextProps.envoy[input.Field]) {
+                    if(nextProps.envoy[input.Field].length) {
+                        intuts[input.Field] = intuts[input.Field] = JSON.parse(nextProps.envoy[input.Field])
+                    } else {
+                        intuts[input.Field] = {value: '', status: 0};
+                    }
+                } else {
+                    intuts[input.Field] = {value: '', status: 0};
+                }
             } else if(input.Field === 'points') {
                 intuts[input.Field] = nextProps.envoy ? nextProps.envoy[input.Field] : '0';
             } else {
@@ -83,7 +94,7 @@ class EnvoyForm extends React.Component {
             <form>
                 {this.state.structure && this.state.structure.map((input, index) => (
                     input.Field === 'party' ? 
-                        <Select key={index} label={input.Comment} value={this.state[input.Field] ? this.state[input.Field] : ''} name={input.Field} onChange={this.onChange}/>
+                        <Select key={index} label={input.Comment} options={this.state.parties} iterateValue="name" iterateName="name" value={this.state[input.Field] ? this.state[input.Field] : ''} name={input.Field} onChange={this.onChange}/>
                     : input.Field === 'description' ? 
                         <Textarea key={index} label={input.Comment} value={this.state[input.Field] ? this.state[input.Field] : ''} name={input.Field} onChange={this.onChange} />
                     : input.Field.match(/criterion/gi) ? 
@@ -102,7 +113,7 @@ class EnvoyForm extends React.Component {
                             {typeof this.state.image == 'string' ? <ImageThumb src={this.state.image} /> : null}
                             <Input key={index} type="file" label={input.Comment}  name={input.Field} onChange={this.onChange} />
                         </div>
-                    : <Input 
+                    : input.Field !== 'id' && <Input 
                             key={index} 
                             type="text" 
                             label={input.Comment} 
@@ -112,7 +123,10 @@ class EnvoyForm extends React.Component {
                             readOnly={input.Field === 'points'}
                         />
                 ))}
-                <Button onClick={(e) => this.props.submitForm(e, this.state)}>Dodaj</Button>
+                <Grid>
+                    <Button primary onClick={(e) => this.props.submitForm(e, this.state)}>Zapisz</Button>
+                    {this.props.remove ? <RemoveButton textValues={["Usuń", "Jesteś pewien?", "Usuwanie..."]} showTimer isExecuting onClick={this.props.remove} />: null}
+                </Grid>
             </form>
         )
     }
@@ -120,7 +134,8 @@ class EnvoyForm extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        envoyStructure: state.appReducer.envoyStructure
+        envoyStructure: state.appReducer.envoyStructure,
+        parties: state.appReducer.parties
     }
 }
 

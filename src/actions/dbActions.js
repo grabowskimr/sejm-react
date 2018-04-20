@@ -26,13 +26,14 @@ const dbActions = {
                 };
                 delete envoy.id;
                 delete envoy.structure;
+                delete envoy.parties;
                 return axios.post("/dbCall.php", {addEnvoy: true, envoy: envoy, image: image})
                     .then((response) => 'Dodano posła')
             });
     },
 
-    getMeps: function() {
-        return axios.get(`/dbCall.php?action=getMeps`)
+    getMeps: function(data) {
+        return axios.get(`/dbCall.php?action=getMeps&name=${data.name}&surname=${data.surname}&party=${data.party}&constituency=${data.constituency}&page=${data.page}&step=${data.step}`)
             .then(response => response.data)
     },
 
@@ -62,6 +63,7 @@ const dbActions = {
                     var id = envoy.id;
                     delete envoy.id;
                     delete envoy.structure;
+                    delete envoy.parties;
                     return axios.post("/dbCall.php", {updateEnvoy: true, envoy: envoy, image: image, id: id})
                         .then((response) => 'Uaktualniono posła');
                 });
@@ -74,10 +76,46 @@ const dbActions = {
             var id = envoy.id;
             delete envoy.id;
             delete envoy.structure;
+            delete envoy.parties;
             return axios.post("/dbCall.php", {updateEnvoy: true, envoy: envoy, image: envoy.image, id: id})
                 .then((response) => 'Uaktualniono posła');
         }
     },
+
+    getParty: function(id) {
+        return axios.get(`/dbCall.php?action=getParty`)
+            .then(response => response.data)
+    },
+
+    addCriterion: function(criterion) {
+        return axios.post("/dbCall.php", {addCriterion: true, name: criterion})
+            .then((response) => 'Dodano kryterium');
+    },
+
+    removeCriterion: function(criterion) {
+        return axios.post("/dbCall.php", {removeCriterion: true, name: criterion})
+            .then((response) => {
+                return {
+                    status: 'Usunięto kryterium',
+                    structure: response.data
+                }
+            });
+    },
+
+    stepForward: function(data) {
+        return axios.get(`/dbCall.php?action=getMeps&name=${data.searchName}&surname=${data.searchSurname}&party=${data.searchParty}&constituency=${data.searchConsituency}&page=${data.page}&step=${data.step}`)
+            .then(response => response.data)
+    },
+
+    stepBack: function(data) {
+        return axios.get(`/dbCall.php?action=getMeps&name=${data.searchName}&surname=${data.searchSurname}&party=${data.searchParty}&constituency=${data.searchConsituency}&page=${data.page}&step=${data.step}`)
+            .then(response => response.data)
+    },
+
+    removeEnvoy: function(id) {
+        return axios.post("/dbCall.php", {removeEnvoy: true, id: id})
+            .then((response) => 'Usunięto posła');
+    }
 }
 
 

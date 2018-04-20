@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import Button from './Button';
+
 const Table = styled.table`
     background: #fff;
     width: 100%;
+    border-collapse: inherit;
 `;
 
 const Tr = styled.tr`
@@ -22,6 +25,11 @@ const TdImg = styled(Td)`
     display: flex;
     align-items: center;
     font-size: 15px;
+`;
+
+const LastTd = styled(Td)`
+    padding: 5px;
+    width: 100px;
 `;
 
 const Th = styled.th`
@@ -55,13 +63,13 @@ const MepsTable = (props) => (
                 <Tr key={envoy.id}>
                     <TdImg>
                         <Img src={envoy.image} />
-                        {envoy.name}
+                        {envoy.name} {envoy.surname}
                     </TdImg>
                     <Td>{envoy.party}</Td>
                     <Td>{envoy.constituency}</Td>
                     <Td>{envoy.position}</Td>
                     <Td>{envoy.points}</Td>
-                    <Td><Link to={'/edycja/' + envoy.id}>Edytuj</Link></Td>
+                    <LastTd><Link to={'/edycja/' + envoy.id}><Button centered>Edytuj</Button></Link></LastTd>
                 </Tr>
             ))}
         </tbody>

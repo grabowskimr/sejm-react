@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Title from '../containers/Title';
 import EnvoyForm from './EnvoyForm';
+import Section from '../containers/Section';
 import { addEnvoy } from '../actions/actions';
 
 class AddEnvoyComponent extends React.Component {
@@ -19,12 +20,12 @@ class AddEnvoyComponent extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <Section>
                 <Title>Dodaj Posła</Title>
                 <EnvoyForm 
                     submitForm={this.submitForm}
                 />
-            </React.Fragment>
+            </Section>
         )
     }
 }

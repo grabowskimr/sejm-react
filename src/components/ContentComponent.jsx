@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
+import { connect } from 'react-redux';
 
-import EnvoyComponent from './EnvoyComponent';
 import EnvoyList from './EnvoyList';
 import AddCriterionComponent from './AddCriterionComponent';
 import AddEnvoyComponent from './AddEnvoyComponent';
+import RemoveCriterionComponent from './RemoveCriterionComponent';
 import UpdateEnvoyComponent from './UpdateEnvoyComponent';
-
 import Notify from './Notify';
+import { getParty } from '../actions/actions';
 
 class ContentComponent extends React.Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class ContentComponent extends React.Component {
     }
 
     componentDidMount() {
-        this.props.history.push('/')
+        this.props.getParty();
+        this.props.history.push('/');
     }
 
     render() {
@@ -26,7 +28,7 @@ class ContentComponent extends React.Component {
                     <Route exact path="/dodaj" component={AddEnvoyComponent} />
                     <Route path="/edycja/:id" component={UpdateEnvoyComponent} /> 
                     <Route exact path="/dodajKryterium" component={AddCriterionComponent} />
-                    <Route path="/posel" component={EnvoyComponent} />
+                    <Route exact path="/usunKryterium" component={RemoveCriterionComponent} />
                 </Switch>
                 <Notify />
             </React.Fragment>
@@ -34,4 +36,4 @@ class ContentComponent extends React.Component {
     }
 }
 
-export default ContentComponent;
+export default connect(null, {getParty})(ContentComponent);
