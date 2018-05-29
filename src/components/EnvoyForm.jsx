@@ -16,7 +16,8 @@ class EnvoyForm extends React.Component {
         super(props);
         this.state = {
             structure: this.props.envoyStructure,
-            parties: this.props.parties
+            parties: this.props.parties,
+            types: [{name: 'Poseł'}, {name: 'Senator'}]
         };
         this.onChange = this.onChange.bind(this);
         this.changeCriterion = this.changeCriterion.bind(this);
@@ -113,7 +114,8 @@ class EnvoyForm extends React.Component {
                             {typeof this.state.image == 'string' ? <ImageThumb src={this.state.image} /> : null}
                             <Input key={index} type="file" label={input.Comment}  name={input.Field} onChange={this.onChange} />
                         </div>
-                    : input.Field !== 'id' && <Input 
+                    : input.Field === 'type' ? <Select key={index} label={input.Comment} options={this.state.types} iterateValue="name" iterateName="name" value={this.state[input.Field] ? this.state[input.Field] : ''} name={input.Field} onChange={this.onChange}/> :
+                    input.Field !== 'id' && <Input 
                             key={index} 
                             type="text" 
                             label={input.Comment} 
