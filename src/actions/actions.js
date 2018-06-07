@@ -93,3 +93,9 @@ export function search() {
         type: ACTIONS.SEARCH
     }
 }
+
+export function getCountries() {
+    return {
+        type: ACTIONS.GET_COUNTRIES
+    }
+}

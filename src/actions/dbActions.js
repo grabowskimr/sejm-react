@@ -28,6 +28,7 @@ const dbActions = {
                 delete envoy.structure;
                 delete envoy.parties;
                 delete envoy.types;
+                delete envoy.countries;
                 return axios.post("/dbCall.php", {addEnvoy: true, envoy: envoy, image: image})
                     .then((response) => 'Dodano posła')
             });
@@ -66,6 +67,7 @@ const dbActions = {
                     delete envoy.structure;
                     delete envoy.parties;
                     delete envoy.types;
+                    delete envoy.countries;
                     return axios.post("/dbCall.php", {updateEnvoy: true, envoy: envoy, image: image, id: id})
                         .then((response) => 'Uaktualniono posła');
                 });
@@ -80,6 +82,7 @@ const dbActions = {
             delete envoy.structure;
             delete envoy.parties;
             delete envoy.types;
+            delete envoy.countries;
             return axios.post("/dbCall.php", {updateEnvoy: true, envoy: envoy, image: envoy.image, id: id})
                 .then((response) => 'Uaktualniono posła');
         }
@@ -118,7 +121,12 @@ const dbActions = {
     removeEnvoy: function(id) {
         return axios.post("/dbCall.php", {removeEnvoy: true, id: id})
             .then((response) => 'Usunięto posła');
-    }
+    },
+
+    getCountries: function(id) {
+        return axios.get(`/dbCall.php?action=getCountries`)
+            .then(response => response.data)
+    },
 }
 
 

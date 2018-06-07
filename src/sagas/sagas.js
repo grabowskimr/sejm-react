@@ -60,6 +60,11 @@ function* removeEnvoy(action) {
     yield put({type: ACTIONS.REMOVE_ENVOY_SUCCESS, payload: {status}});
 }
 
+function* getCountries() {
+    const countries = yield call(dbActions.getCountries);
+    yield put({type: ACTIONS.GET_COUNTRIES_SUCCESS, payload: {countries}});
+}
+
 
 function* sejmikSaga() {
     yield takeLatest(ACTIONS.GET_ENVOY_STRUCTURE, getEnvoyStructure);
@@ -73,6 +78,7 @@ function* sejmikSaga() {
     yield takeLatest(ACTIONS.STEP_FORWARD, stepForward);
     yield takeLatest(ACTIONS.STEP_BACK, stepBack);
     yield takeLatest(ACTIONS.REMOVE_ENVOY, removeEnvoy);
+    yield takeLatest(ACTIONS.GET_COUNTRIES, getCountries);
 }
 
 export default sejmikSaga;

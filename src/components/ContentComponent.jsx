@@ -8,7 +8,7 @@ import AddEnvoyComponent from './AddEnvoyComponent';
 import RemoveCriterionComponent from './RemoveCriterionComponent';
 import UpdateEnvoyComponent from './UpdateEnvoyComponent';
 import Notify from './Notify';
-import { getParty } from '../actions/actions';
+import { getParty, getCountries } from '../actions/actions';
 
 class ContentComponent extends React.Component {
     constructor(props) {
@@ -17,6 +17,7 @@ class ContentComponent extends React.Component {
 
     componentDidMount() {
         this.props.getParty();
+        this.props.getCountries();
         this.props.history.push('/');
     }
 
@@ -36,4 +37,4 @@ class ContentComponent extends React.Component {
     }
 }
 
-export default connect(null, {getParty})(ContentComponent);
+export default connect(null, {getParty, getCountries})(ContentComponent);

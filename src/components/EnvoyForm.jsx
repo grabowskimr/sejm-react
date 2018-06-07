@@ -10,6 +10,7 @@ import Criterion from '../containers/Criterion';
 import ImageThumb from '../containers/ImageThumb';
 import Grid from '../containers/Grid';
 import RemoveButton from '../containers/RemoveButton';
+import AutoComplate from './AutoComplate';
 
 class EnvoyForm extends React.Component {
     constructor(props) {
@@ -17,9 +18,11 @@ class EnvoyForm extends React.Component {
         this.state = {
             structure: this.props.envoyStructure,
             parties: this.props.parties,
-            types: [{name: 'Poseł'}, {name: 'Senator'}]
+            types: [{name: 'Poseł'}, {name: 'Senator'}],
+            countries: this.props.countries
         };
         this.onChange = this.onChange.bind(this);
+        this.onChangeSuggestion = this.onChangeSuggestion.bind(this);
         this.changeCriterion = this.changeCriterion.bind(this);
         this.changeStatus = this.changeStatus.bind(this);
     }
@@ -63,6 +66,12 @@ class EnvoyForm extends React.Component {
                 [name]: e.target.value
             });
         }
+    }
+    
+    onChangeSuggestion(name, value) {
+        this.setState({
+            [name]: value
+        });
     }
 
     changeCriterion(name, type, value) {
@@ -109,6 +118,15 @@ class EnvoyForm extends React.Component {
                             changeStatus={this.changeStatus}
                             status={this.state[input.Field] ? this.state[input.Field].status : 0}
                         />
+                    : input.Field === 'country' ?
+                        <AutoComplate 
+                            key={index} 
+                            countries={this.state.countries} 
+                            onChange={this.onChange} 
+                            onChangeSuggestion={this.onChangeSuggestion}
+                            value={this.state[input.Field] ? this.state[input.Field] : ''} 
+                            name={input.Field}
+                        />
                     : input.Field === 'image' ?
                         <div key={index}>
                             {typeof this.state.image == 'string' ? <ImageThumb src={this.state.image} /> : null}
@@ -137,7 +155,8 @@ class EnvoyForm extends React.Component {
 function mapStateToProps(state) {
     return {
         envoyStructure: state.appReducer.envoyStructure,
-        parties: state.appReducer.parties
+        parties: state.appReducer.parties,
+        countries: state.appReducer.countries
     }
 }
 

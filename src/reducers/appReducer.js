@@ -13,7 +13,8 @@ const appReducer = (state = {
     searchParty: '',
     searchConsituency: '',
     page: 0,
-    step: 50
+    step: 50,
+    countries: []
 }, action) => {
     switch(action.type) {
         case ACTIONS.GET_ENVOY_STRUCTURE_SUCCESS:
@@ -103,6 +104,11 @@ const appReducer = (state = {
                 page: 0
             }
         }
+        case ACTIONS.GET_COUNTRIES_SUCCESS:
+            return {
+                ...state,
+                countries: action.payload.countries
+            }
         default:
             return state;
     }
