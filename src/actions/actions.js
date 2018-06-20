@@ -99,3 +99,13 @@ export function getCountries() {
         type: ACTIONS.GET_COUNTRIES
     }
 }
+
+export function updateCriterion(name, value) {
+    return {
+        type: ACTIONS.UPDATE_CRITERION,
+        payload: {
+            name,
+            value
+        }
+    }
+}

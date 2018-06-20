@@ -7,6 +7,7 @@ import AddCriterionComponent from './AddCriterionComponent';
 import AddEnvoyComponent from './AddEnvoyComponent';
 import RemoveCriterionComponent from './RemoveCriterionComponent';
 import UpdateEnvoyComponent from './UpdateEnvoyComponent';
+import UpdateCriterion from './UpdateCriterion';
 import Notify from './Notify';
 import { getParty, getCountries } from '../actions/actions';
 
@@ -30,6 +31,7 @@ class ContentComponent extends React.Component {
                     <Route path="/edycja/:id" component={UpdateEnvoyComponent} /> 
                     <Route exact path="/dodajKryterium" component={AddCriterionComponent} />
                     <Route exact path="/usunKryterium" component={RemoveCriterionComponent} />
+                    <Route exact path="/edytujKryterium" component={UpdateCriterion} />
                 </Switch>
                 <Notify />
             </React.Fragment>

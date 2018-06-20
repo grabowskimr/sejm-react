@@ -30,7 +30,6 @@ class UpdateEnvoyComponent extends React.Component {
 
     submitForm(e, values) {
         e.preventDefault();
-        console.log(values);
         this.props.updateEnvoy(values);
         this.props.history.push('/');
     }

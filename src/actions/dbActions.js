@@ -127,6 +127,11 @@ const dbActions = {
         return axios.get(`/dbCall.php?action=getCountries`)
             .then(response => response.data)
     },
+
+    updateCriterion: function(data) {
+        return axios.post("/dbCall.php", {changeCriterionName: true, criterion: data.name, newvalue: data.value})
+            .then((response) => 'Edycja udana');
+    }
 }
 
 

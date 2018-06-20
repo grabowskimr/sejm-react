@@ -40,6 +40,7 @@ const HeaderContainer = () => (
             <li><MenuLink to="/dodaj">Dodaj posła</MenuLink></li>
             <li><MenuLink to="/dodajKryterium">Dodaj Kryterium</MenuLink></li>
             <li><MenuLink to="/usunKryterium">Usuń Kryterium</MenuLink></li>
+            <li><MenuLink to="/edytujKryterium">Edytuj Kryterium</MenuLink></li>
         </MenuList>
     </Section>
 );

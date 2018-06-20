@@ -65,6 +65,10 @@ function* getCountries() {
     yield put({type: ACTIONS.GET_COUNTRIES_SUCCESS, payload: {countries}});
 }
 
+function* updateCriterion(action) {
+    const status = yield call(dbActions.updateCriterion, action.payload);
+    yield put({type: ACTIONS.UPDATE_CRITERION_SUCCESS, payload: {status}});
+}
 
 function* sejmikSaga() {
     yield takeLatest(ACTIONS.GET_ENVOY_STRUCTURE, getEnvoyStructure);
@@ -79,6 +83,7 @@ function* sejmikSaga() {
     yield takeLatest(ACTIONS.STEP_BACK, stepBack);
     yield takeLatest(ACTIONS.REMOVE_ENVOY, removeEnvoy);
     yield takeLatest(ACTIONS.GET_COUNTRIES, getCountries);
+    yield takeLatest(ACTIONS.UPDATE_CRITERION, updateCriterion);
 }
 
 export default sejmikSaga;

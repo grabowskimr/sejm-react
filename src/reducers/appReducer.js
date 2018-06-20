@@ -33,7 +33,8 @@ const appReducer = (state = {
         case ACTIONS.ADD_ENVOY_SUCCESS:
         case ACTIONS.UPDATE_ENVOY_SUCCESS:
         case ACTIONS.ADD_CRITERION_SUCCESS:
-        case ACTIONS.REMOVE_ENVOY_SUCCESS: {
+        case ACTIONS.REMOVE_ENVOY_SUCCESS:
+        case ACTIONS.UPDATE_CRITERION_SUCCESS: {
             return {
                 ...state,
                 showNotify: true,
