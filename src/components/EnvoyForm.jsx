@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { hexMd5 } from 'front-md5';
 
 import { getEnvoyStructure } from '../actions/actions';
 import Select from '../containers/Select';
@@ -19,7 +20,9 @@ class EnvoyForm extends React.Component {
             structure: this.props.envoyStructure,
             parties: this.props.parties,
             types: [{name: 'Poseł'}, {name: 'Senator'}],
-            countries: this.props.countries
+            visibles: [{name: 'Widoczny', value: 1}, {name: 'Nie widzoczny', value: 0}],
+            countries: this.props.countries,
+            hash: hexMd5(new Date().getTime())
         };
         this.onChange = this.onChange.bind(this);
         this.onChangeSuggestion = this.onChangeSuggestion.bind(this);
@@ -46,12 +49,16 @@ class EnvoyForm extends React.Component {
                 }
             } else if(input.Field === 'points') {
                 intuts[input.Field] = nextProps.envoy ? nextProps.envoy[input.Field] : '0';
+            } else if(input.Field === 'hash' && !nextProps.envoy) {
+                intuts[input.Field] = this.state.hash;
+            } else if(input.Field === 'visible') {
+                intuts[input.Field] = nextProps.envoy ? nextProps.envoy[input.Field] : 1;
             } else {
                 intuts[input.Field] = nextProps.envoy ? nextProps.envoy[input.Field] : '';
             }
         });
         this.setState(Object.assign({
-            structure: nextProps.envoyStructure,
+            structure: nextProps.envoyStructure
         }, intuts))
     }
 
@@ -132,8 +139,17 @@ class EnvoyForm extends React.Component {
                             {typeof this.state.image == 'string' ? <ImageThumb src={this.state.image} /> : null}
                             <Input key={index} type="file" label={input.Comment}  name={input.Field} onChange={this.onChange} />
                         </div>
-                    : input.Field === 'type' ? <Select key={index} label={input.Comment} options={this.state.types} iterateValue="name" iterateName="name" value={this.state[input.Field] ? this.state[input.Field] : ''} name={input.Field} onChange={this.onChange}/> :
-                    input.Field !== 'id' && <Input 
+                    : input.Field === 'type' ? <Select key={index} label={input.Comment} options={this.state.types} iterateValue="name" iterateName="name" value={this.state[input.Field] ? this.state[input.Field] : ''} name={input.Field} onChange={this.onChange}/> 
+                    : input.Field === 'visible' ? <Select key={index} label={input.Comment} defaultOption={true} options={this.state.visibles} iterateValue="value" iterateName="name" value={this.state[input.Field] ? this.state[input.Field] : 1} name={input.Field} onChange={this.onChange}/> 
+                    : input.Field === 'hash' ? <Input 
+                            key={index} 
+                            type="hidden"
+                            value={this.state[input.Field] ? this.state[input.Field] : this.state.hash} 
+                            name={input.Field} 
+                            onChange={this.onChange} 
+                            readOnly={input.Field === 'hash'}
+                        />
+                    : input.Field !== 'id' && <Input 
                             key={index} 
                             type="text" 
                             label={input.Comment} 

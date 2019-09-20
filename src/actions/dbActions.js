@@ -28,7 +28,10 @@ const dbActions = {
                 delete envoy.structure;
                 delete envoy.parties;
                 delete envoy.types;
+                delete envoy.visibles;
                 delete envoy.countries;
+                delete envoy.undefined;
+                envoy.visible = parseInt(envoy.visible) ? 1 : 0;
                 return axios.post("/dbCall.php", {addEnvoy: true, envoy: envoy, image: image})
                     .then((response) => 'Dodano posła')
             });
@@ -66,8 +69,11 @@ const dbActions = {
                     delete envoy.id;
                     delete envoy.structure;
                     delete envoy.parties;
-                    delete envoy.types;
+                    delete envoy.visibles;
                     delete envoy.countries;
+                    delete envoy.types;
+                    delete envoy.undefined;
+                    envoy.visible = parseInt(envoy.visible) ? 1 : 0;
                     return axios.post("/dbCall.php", {updateEnvoy: true, envoy: envoy, image: image, id: id})
                         .then((response) => 'Uaktualniono posła');
                 });
@@ -81,8 +87,11 @@ const dbActions = {
             delete envoy.id;
             delete envoy.structure;
             delete envoy.parties;
-            delete envoy.types;
+            delete envoy.visibles;
             delete envoy.countries;
+            delete envoy.types;
+            delete envoy.undefined;
+            envoy.visible = parseInt(envoy.visible) ? 1 : 0;
             return axios.post("/dbCall.php", {updateEnvoy: true, envoy: envoy, image: envoy.image, id: id})
                 .then((response) => 'Uaktualniono posła');
         }
@@ -131,6 +140,9 @@ const dbActions = {
     updateCriterion: function(data) {
         return axios.post("/dbCall.php", {changeCriterionName: true, criterion: data.name, newvalue: data.value})
             .then((response) => 'Edycja udana');
+    },
+    getEnvoyByParty: function(party) {
+        return axios.get(`/dbCall.php?action=getEnvoyByParty&party=${party}`)
     }
 }
 

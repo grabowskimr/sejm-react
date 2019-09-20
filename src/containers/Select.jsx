@@ -39,7 +39,7 @@ const SelectContainer = (props) => {
                 <LabeledSelectContainer width={props.width}>
                     <Label>{props.label}</Label>
                     <Select {...props}>
-                        <option value="">Wszystkie</option>
+                        {!props.defaultOption && <option value="">Wszystkie</option>}
                         {options.map((option, index) => (
                             <option key={index} value={option[props.iterateValue]}>{option[props.iterateName]}</option>
                         ))}

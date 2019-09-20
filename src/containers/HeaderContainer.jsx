@@ -41,6 +41,7 @@ const HeaderContainer = () => (
             <li><MenuLink to="/dodajKryterium">Dodaj Kryterium</MenuLink></li>
             <li><MenuLink to="/usunKryterium">Usuń Kryterium</MenuLink></li>
             <li><MenuLink to="/edytujKryterium">Edytuj Kryterium</MenuLink></li>
+            <li><MenuLink to="/generator">Generuj linki do ankiety</MenuLink></li>
         </MenuList>
     </Section>
 );
