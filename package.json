@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/grabeqx/sejm-react#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "front-md5": "^1.0.0",
     "history": "^4.7.2",
     "jquery": "^3.3.1",
